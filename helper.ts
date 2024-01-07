@@ -1,5 +1,6 @@
 import {log, Message} from "wechaty";
 import * as PUPPET from "wechaty-puppet";
+import { sendMsg } from './spark';
 
 export const LOGPRE = "[PadLocalDemo]"
 
@@ -87,7 +88,9 @@ export async function getMessagePayload(message: Message) {
 }
 
 export async function dingDongBot(message: Message) {
-  if (message.to()?.self() && message.text().indexOf("ding") !== -1) {
-    await message.talker().say(message.text().replace("ding", "dong"));
+  if (message.to()?.self() && message.type() == PUPPET.types.Message.Text) {
+    await sendMsg(message.text(), (data:string) => {
+       message.talker().say(data);
+    });
   }
 }
