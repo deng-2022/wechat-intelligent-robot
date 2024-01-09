@@ -57,7 +57,7 @@ const sendMsg = async (inputVal: string, callback: (data: any) => void) => {
           max_tokens: 1024,
         },
       },
-      
+
       payload: {
         message: {
           // 如果想获取结合上下文的回答，需要开发者每次将历史问答信息一起传给服务端，如下示例

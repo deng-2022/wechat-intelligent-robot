@@ -1,8 +1,8 @@
-import {log, Message} from "wechaty";
+import { log, Message } from "wechaty";
 import * as PUPPET from "wechaty-puppet";
-import { sendMsg } from './spark';
+import { sendMsg } from "./spark";
 
-export const LOGPRE = "[PadLocalDemo]"
+export const LOGPRE = "[PadLocalDemo]";
 
 export async function getMessagePayload(message: Message) {
   switch (message.type()) {
@@ -35,7 +35,10 @@ export async function getMessagePayload(message: Message) {
       const emotionFile = await message.toFileBox();
 
       const emotionJSON = emotionFile.toJSON();
-      log.info(LOGPRE, `get message emotion json: ${JSON.stringify(emotionJSON)}`);
+      log.info(
+        LOGPRE,
+        `get message emotion json: ${JSON.stringify(emotionJSON)}`
+      );
 
       const emotionBuffer: Buffer = await emotionFile.toBuffer();
 
@@ -60,7 +63,10 @@ export async function getMessagePayload(message: Message) {
       const artworkImage = await messageImage.artwork();
       const artworkImageData = await artworkImage.toBuffer();
 
-      log.info(LOGPRE, `get message image, artwork: ${artworkImageData.length}`);
+      log.info(
+        LOGPRE,
+        `get message image, artwork: ${artworkImageData.length}`
+      );
 
       break;
     }
@@ -89,8 +95,8 @@ export async function getMessagePayload(message: Message) {
 
 export async function dingDongBot(message: Message) {
   if (message.to()?.self() && message.type() == PUPPET.types.Message.Text) {
-    await sendMsg(message.text(), (data:string) => {
-       message.talker().say(data);
+    await sendMsg(message.text(), (data: string) => {
+      message.talker().say(data);
     });
   }
 }
